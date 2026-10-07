@@ -1,2 +1,2 @@
 # Tabular_Project_DATA4380
-This is a tabular presentation project for UTA
+This is a tabular presentation project for our Data Problems Class 
