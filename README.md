@@ -10,22 +10,25 @@ This project explores pitch-level softball tracking data from a game between **U
 
 We are currently:
 
-- learning the structure and meaning of the softball data
+- understanding the structure and meaning of the dataset
 - identifying important variables
 - investigating missing values and data quality
 - exploring pitcher, batter, and team-level patterns
-- evaluating possible machine learning research questions
-- determining which features and targets are appropriate for modeling
+- developing possible machine learning research questions
 
 ### Notes
 
-**Franklin — October 7, 2026**
+**Franklin — 10/07/2026**
 
 I created a separate file for possible research questions so everyone can contribute ideas before we decide on the final project question.
 
 I have added a few possible questions so far, but **nothing is final**. Everyone should feel free to add questions or directions they think could work with the dataset.
 
+I also suggest that, if possible, we get in contact with one of the coaches. Having a better understanding of what they would like to learn or extract from the data could help us develop a stronger and more useful research question.
+
 **Research Question Notes:** [Possible Research Questions](https://github.com/mikeSheehey/Tabular_Project_DATA4380/blob/main/Research_question.md)
+
+## Dataset
 
 The current dataset contains pitch-level tracking data from a UTA vs. South Dakota State game.
 
@@ -46,23 +49,13 @@ The dataset contains a large number of numerical and categorical features, makin
 
 ## Current Research Direction
 
-The coaching staff is primarily interested in gaining useful information about players and using data more effectively in player evaluation.
+One idea under consideration is using **Principal Component Analysis (PCA)** to reduce the large number of numerical pitch measurements and explore the major patterns that differentiate pitches and players.
 
-Some research directions currently being considered include:
-
-- identifying characteristics that distinguish different pitchers
-- developing data-driven pitcher profiles
-- examining relationships between pitch characteristics and pitch outcomes
-- studying batter responses to different pitch characteristics
-- comparing measurable patterns between UTA and South Dakota State
-
-One idea under consideration is using **Principal Component Analysis (PCA)** to reduce the large number of numerical pitch measurements and investigate the major patterns that differentiate pitches and players.
-
-These are exploratory directions and may change as we learn more about the dataset.
+This direction may change as we better understand the dataset and receive more input from the coaching staff.
 
 ## Project Workflow
 
-The project follows the complete data science workflow required for DATA 4380:
+The project follows the DATA 4380 data science workflow:
 
 1. Problem Definition
 2. Data Understanding
@@ -80,23 +73,6 @@ The project follows the complete data science workflow required for DATA 4380:
 14. Findings and Limitations
 15. Conclusion
 
-## Current Tasks
-
-- [ ] Understand important softball terminology
-- [ ] Document dataset variables
-- [ ] Analyze missing values
-- [ ] Identify numerical and categorical features
-- [ ] Perform exploratory data analysis
-- [ ] Investigate feature relationships
-- [ ] Evaluate PCA / dimensionality reduction
-- [ ] Select final research question
-- [ ] Define target variable and ML task
-- [ ] Establish baseline model
-- [ ] Compare multiple machine learning models
-- [ ] Interpret final model
-- [ ] Translate findings into useful coaching insights
-- [ ] Prepare final presentation
-
 ## Important Limitation
 
 The current data represents a limited game sample rather than an entire season.
@@ -104,8 +80,6 @@ The current data represents a limited game sample rather than an entire season.
 Because of this, the project will avoid making broad claims about overall player ability or season-long performance. Findings will be interpreted primarily as patterns observed within the available data.
 
 ## Tools
-
-The project will primarily use:
 
 - Python
 - pandas
