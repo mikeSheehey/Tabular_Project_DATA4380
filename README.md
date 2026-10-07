@@ -25,8 +25,7 @@ I created a separate file for possible research questions so everyone can contri
 
 I have added a few possible questions so far, but **nothing is final**. Everyone should feel free to add questions or directions they think could work with the dataset.
 
-**Research Question Notes:** [ADD LINK HERE]
-## Dataset
+**Research Question Notes:** [Possible Research Questions](https://github.com/mikeSheehey/Tabular_Project_DATA4380/blob/main/Research_question.md)
 
 The current dataset contains pitch-level tracking data from a UTA vs. South Dakota State game.
 
