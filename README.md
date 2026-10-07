@@ -24,7 +24,7 @@ I created a separate file for possible research questions so everyone can contri
 
 I have added a few possible questions so far, but **nothing is final**. Everyone should feel free to add questions or directions they think could work with the dataset.
 
-I also suggest that, if possible, we get in contact with one of the coaches. Having a better understanding of what they would like to learn or extract from the data could help us develop a stronger and more useful research question.
+**I also suggest that, if possible, we get in contact with one of the coaches. Having a better understanding of what they would like to learn or extract from the data could help us develop a stronger and more useful research question**
 
 **Research Question Notes:** [Possible Research Questions](https://github.com/mikeSheehey/Tabular_Project_DATA4380/blob/main/Research_question.md)
 
