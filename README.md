@@ -17,6 +17,14 @@ We are currently:
 - developing possible machine learning research questions
 
 ### Notes
+**Nathan - 10/12/2026**
+I tried emailing the coaches and calling the athletics department but they all ignored me lol.
+
+Luckily, after looking on UTA's website, I found that UTA Softball uses equipment from FlightScope both inside their training facilities and on the field (our data is field data).
+Here is the link to the manufacturer that UTA uses to measure the softball data: https://flightscope.com/pages/softball
+Additionally, the terminology that FlightScope uses: https://cdn.shopify.com/s/files/1/0597/2623/3732/files/2023_X3B_Softball_Glossary.pdf?v=1729085792
+
+Previously we had no domain knowledge, and now we do!
 
 **Franklin — 10/07/2026**
 
