@@ -76,7 +76,7 @@ There is always a star player. It could be useful to identify desired traits fro
 Would likely require a deep understanding of player routine and what makes them special (training and performance).
 
 ### Reading the pitch: Predicting softball outcomes across teams
-** Can a model trained on one team's pitchers predict whether a softball pitch will be a strike, and whether the batter will swing, against a team it has never seen? And do pitch "families" discovered from the data improve those predictions?
+** Can a model trained on one team's pitchers predict whether a softball pitch will be a strike, and whether the batter will swing, against a team it has never seen? And do pitch "families" discovered from the data improve those predictions?**
 - By Sarthak Patel, (this question will be a lot like franklin's 3 suggestion question) 
 
 why it works:
