@@ -75,10 +75,16 @@ Everyone can add possible questions below.
 There is always a star player. It could be useful to identify desired traits from this player that makes them unique and then use that profile to recruit players that could be molded into a similar manner.
 Would likely require a deep understanding of player routine and what makes them special (training and performance).
 
-### [Name]
-**Research Question:**  
-_Add question here._
+### Reading the pitch: Predicting softball outcomes across teams
+**Can a model trained on one team's pitchers predict whether a softball pitch will be a strike, and whether the batter will swing, against a team it has never seen? And do pitch "families" discovered from the data improve those predictions?
+- By Sarthak Patel, (this question will be a lot like franklin's 3 suggestion question) 
 
+why it works:
+1. The data is recorded pitch by pitch, giving 258 piches with location, speed, spin, and outcome, which is enough to test simple predictions. Training on one team and testing on the other gives a fair check on unseen pitchers, and we report uncertainty because the sample is small.
+
+**Research Question:**  
+
+### [Name]
 **Why it might be useful:**  
 _Add notes here._
 
