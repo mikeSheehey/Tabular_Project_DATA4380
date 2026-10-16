@@ -67,14 +67,13 @@ This could examine differences in:
 
 Everyone can add possible questions below.
 
-### [Name]
-**Research Question:**  
-_Add question here._
+### Recruitment of Similar Desired Profiles
+**Can desired player profiles be compared with upcoming recruits to build players with desired traits?**  
+
 
 **Why it might be useful:**  
-_Add notes here._
-
----
+There is always a star player. It could be useful to identify desired traits from this player that makes them unique and then use that profile to recruit players that could be molded into a similar manner.
+Would likely require a deep understanding of player routine and what makes them special (training and performance).
 
 ### [Name]
 **Research Question:**  
