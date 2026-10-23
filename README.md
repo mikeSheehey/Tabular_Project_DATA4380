@@ -25,7 +25,13 @@ We are currently:
 - developing possible machine learning research questions
 
 ### Notes
+
+**Nathan - 10/23/2026**
+
+This is where we got the ideas for the visualizations: https://baseballsavant.mlb.com/visuals
+
 **Nathan - 10/12/2026**
+
 I tried emailing the coaches and calling the athletics department but they all ignored me lol.
 
 Luckily, after looking on UTA's website, I found that UTA Softball uses equipment from FlightScope both inside their training facilities and on the field (our data is field data).
