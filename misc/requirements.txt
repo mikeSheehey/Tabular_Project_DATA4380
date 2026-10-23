@@ -1,0 +1,12 @@
+# Dependencies for Softball_4380.ipynb
+# Recommended Python version: 3.12
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+umap-learn
+hdbscan
+plotly
+jupyterlab
+ipykernel

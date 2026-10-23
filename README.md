@@ -4,6 +4,14 @@
 
 This project explores pitch-level softball tracking data from a game between **UT Arlington and South Dakota State**. The project is being developed in collaboration with the UTA softball program, with the broader goal of helping coaches move toward a more data-driven understanding of player performance.
 
+# IMPORTANT NOTES
+
+Use the requirements file found in the \misc folder before all else
+
+```
+python -m pip install -r requirements.txt
+```
+
 ## Project Status
 
 **Current stage:** Data understanding, exploratory analysis, and research question development.
