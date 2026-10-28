@@ -1,105 +1,230 @@
 # UTA Softball Analytics
 
-**DATA 4380 — Data Problems**
+**DATA 4380 — Data Problems**  
+**The University of Texas at Arlington**  
+**Project Status: Completed**
 
-This project explores pitch-level softball tracking data from a game between **UT Arlington and South Dakota State**. The project is being developed in collaboration with the UTA softball program, with the broader goal of helping coaches move toward a more data-driven understanding of player performance.
+## Overview
 
-# IMPORTANT NOTES
+This project explored pitch-level softball tracking data from a game between **UT Arlington and South Dakota State**.
 
-Use the requirements file found in the \misc folder before all else
+We used data cleaning, exploratory analysis, K-Nearest Neighbors (KNN), K-means clustering, and visualizations to investigate how physical pitch measurements can help distinguish pitch types and describe pitching patterns.
 
-```
-python -m pip install -r requirements.txt
-```
+A major challenge was the large number of missing pitch-type labels. Our analysis explored ways to estimate these labels while recognizing that estimated labels require further validation.
 
-## Project Status
+## Research Focus
 
-**Current stage:** Data understanding, exploratory analysis, and research question development.
+Our main research focus was:
 
-We are currently:
+**Can we identify different pitching styles and classify pitch types using physical measurements such as velocity, spin rate, and ball movement?**
 
-- understanding the structure and meaning of the dataset
-- identifying important variables
-- investigating missing values and data quality
-- exploring pitcher, batter, and team-level patterns
-- developing possible machine learning research questions
+Our objectives were to:
 
-### Notes
-
-**Nathan - 10/23/2026**
-
-This is where we got the ideas for the visualizations: https://baseballsavant.mlb.com/visuals
-
-**Nathan - 10/12/2026**
-
-I tried emailing the coaches and calling the athletics department but they all ignored me lol.
-
-Luckily, after looking on UTA's website, I found that UTA Softball uses equipment from FlightScope both inside their training facilities and on the field (our data is field data).
-Here is the link to the manufacturer that UTA uses to measure the softball data: https://flightscope.com/pages/softball
-Additionally, the terminology that FlightScope uses: https://cdn.shopify.com/s/files/1/0597/2623/3732/files/2023_X3B_Softball_Glossary.pdf?v=1729085792
-
-Previously we had no domain knowledge, and now we do!
-
-**Franklin — 10/07/2026**
-
-I created a separate file for possible research questions so everyone can contribute ideas before we decide on the final project question.
-
-I have added a few possible questions so far, but **nothing is final**. Everyone should feel free to add questions or directions they think could work with the dataset.
-
-**I also suggest that, if possible, we get in contact with one of the coaches. Having a better understanding of what they would like to learn or extract from the data could help us develop a stronger and more useful research question**
-
-**Research Question Notes:** [Possible Research Questions](https://github.com/mikeSheehey/Tabular_Project_DATA4380/blob/main/Research_question.md)
+- Understand the structure and meaning of the tracking data.
+- Identify missing values and data-quality issues.
+- Explore differences between recorded pitch types.
+- Establish a baseline pitch-type classifier.
+- Investigate missing pitch-type labels using classification and clustering.
+- Visualize pitch characteristics and pitcher-location patterns.
 
 ## Dataset
 
-The current dataset contains pitch-level tracking data from a UTA vs. South Dakota State game.
+The dataset was recorded using **FlightScope tracking software** and contains:
 
-Each row represents a pitch and includes information related to:
+- **259 pitch observations**
+- **125 original variables**
+- **Six recorded pitcher identities**
+- Data from **one UTA vs. South Dakota State game**
 
-- pitcher and batter
-- catcher
-- pitch velocity
-- spin rate
-- horizontal and vertical movement
-- pitch location
-- ball/strike count
-- pitch outcome
-- batted-ball measurements
-- game context
+Each row represents a pitch. Variables include pitcher and batter information, velocity, spin rate, movement, pitch location, ball and strike counts, pitch outcomes, and batted-ball measurements.
 
-The dataset contains a large number of numerical and categorical features, making feature selection and dimensionality reduction important parts of the exploration.
+### Missing Pitch-Type Labels
 
-## Current Research Direction
+Only **127 pitches had original pitch-type labels**, while **132 were missing**. All **131 South Dakota State pitches** were missing `TaggedPitchType`.
 
-One idea under consideration is using **Principal Component Analysis (PCA)** to reduce the large number of numerical pitch measurements and explore the major patterns that differentiate pitches and players.
+This made missing-label handling an important part of the project.
 
-This direction may change as we better understand the dataset and receive more input from the coaching staff.
+## Exploratory Data Analysis
 
-## Project Workflow
+Our initial exploration examined 12 physical measurements across five categories:
 
-The project follows the DATA 4380 data science workflow:
+| Category | Variables |
+| --- | --- |
+| Velocity | `RelSpeed`, `ZoneSpeed` |
+| Spin | `SpinRate`, `SpinAxis` |
+| Release angles | `VertRelAngle`, `HorzRelAngle` |
+| Movement and approach | `VertBreak`, `HorzBreak`, `VertApprAngle`, `HorzApprAngle` |
+| Pitch location | `PlateLocHeight`, `PlateLocSide` |
 
-1. Problem Definition
-2. Data Understanding
-3. Exploratory Data Analysis
-4. Minimum Data Cleaning
-5. Train/Test Split
-6. Baseline Model
-7. Additional Preprocessing
-8. Feature Engineering / Feature Selection
-9. Model Selection
-10. Model Improvement
-11. Hyperparameter Tuning
-12. Model Evaluation
-13. Model Interpretation
-14. Findings and Limitations
-15. Conclusion
+Although approximately 49% of pitches had original pitch-type labels, over 91% had complete measurements across these selected features.
 
-## Important Limitation
+We also compared release-velocity distributions across four recorded UTA pitch-type categories using a **Kruskal–Wallis test**. The test statistic was approximately **46.12**, with a very small p-value, providing evidence of differences among the observed distributions.
 
-The current data represents a limited game sample rather than an entire season.
+Changeups were considerably slower than curveballs, while curveballs and riseballs had similar average velocities. This suggested that velocity was informative but insufficient on its own to distinguish every pitch type.
 
-Because of this, the project will avoid making broad claims about overall player ability or season-long performance. Findings will be interpreted primarily as patterns observed within the available data.
+## Data Preprocessing
+
+### Initial Cleaning
+
+We removed columns that were entirely empty or had at least 80% missing values, reducing the dataset from **125 columns to 53**.
+
+FlightScope documentation helped us interpret the remaining measurements and understand their physical meaning.
+
+### Provisional Pitch-Type Labels
+
+We developed a rule-based labeling approach using velocity and spin rate to estimate some missing pitch types.
+
+At this stage:
+
+- **34 pitches received provisional labels.**
+- **98 pitches remained unmatched.**
+
+Pitches that did not satisfy the rules were marked as unclassified. The provisional labels were estimates, not verified ground truth.
+
+### Preparing Model Inputs
+
+The baseline workflow used:
+
+- Median imputation for missing numerical measurements
+- Feature standardization
+- An 80/20 train/test split
+- KNN with five neighbors
+
+Rows flagged as unresolved were excluded from baseline training.
+
+## Baseline Model: K-Nearest Neighbors
+
+KNN was selected as an interpretable baseline because it classifies pitches using their similarity to nearby labeled pitches.
+
+The baseline produced the following reported test results:
+
+| Metric | Result |
+| --- | ---: |
+| Accuracy | 75.8% |
+| Weighted precision | 0.77 |
+| Weighted recall | 0.76 |
+| Weighted F1-score | 0.75 |
+| Test-set size | 33 pitches |
+
+Performance varied across pitch types. The small test set and use of provisional labels limit how broadly these results can be interpreted.
+
+A separate experiment using **velocity and spin rate** achieved approximately **66% mean five-fold cross-validation accuracy**.
+
+## Additional Preprocessing and Clustering
+
+We explored **KNN and K-means together** to estimate missing pitch-type information.
+
+The workflow compared KNN classifications with cluster-based assignments. Disagreements were excluded from the resulting labeled analysis rather than treated as reliable labels.
+
+K-means used standardized **release velocity and spin rate** to identify groups of physically similar pitches.
+
+| Clustering result | Value |
+| --- | ---: |
+| Selected number of clusters | 5 |
+| Silhouette score | 0.487 |
+| Cluster purity across available labels | 0.52–1.00 |
+
+These results indicated measurable group structure. However, a cluster is not automatically a verified pitch type.
+
+KNN accuracy and the K-means silhouette score answer different questions:
+
+- **KNN accuracy:** How often did predicted labels match the evaluation labels?
+- **Silhouette score:** How separated were the groups in the selected feature space?
+
+These metrics should not be directly compared.
+
+## Visualizations
+
+Our visualizations explored:
+
+- Pitch-type proportions before and after provisional labeling
+- KNN classification results
+- Velocity and spin-rate groups
+- Pitcher-specific pitch patterns
+- Pitch locations and concentrations around home plate
+
+Baseball Savant provided inspiration for the visualizations.
+
+Pitch-location plots describe where pitches were recorded. They do not establish that a particular location caused greater pitching success.
+
+## Key Findings
+
+- Physical pitch measurements provided useful information for distinguishing pitch types.
+- Velocity alone did not clearly separate every recorded pitch category.
+- KNN showed potential for pitch-type classification, although performance varied across classes.
+- K-means identified groups based on velocity and spin rate.
+- Missing-label estimation expanded the available information, but estimated labels still require verification.
+- Pitch-location visualizations helped describe pitcher tendencies within the available game.
+
+## Limitations
+
+### Small Sample
+
+The dataset contains only 259 pitches from one game. Results should not be generalized to an entire season or used to judge overall player ability.
+
+### Missing and Estimated Labels
+
+More than half of the original pitch-type labels were missing. Rule-based and model-based estimates cannot replace independently verified labels.
+
+Because some labels were estimated using physical measurements, classification performance does not establish accuracy against fully verified pitch types.
+
+### Data Quality
+
+Some recorded pitcher identities were inconsistent with official records. Pitcher-level findings therefore remain preliminary.
+
+### Uneven Class Representation
+
+Some pitch categories had very few evaluation examples, making class-level performance estimates unstable.
+
+### Limited Domain Feedback
+
+FlightScope documentation improved our understanding, but additional coaching input is needed to validate interpretations and connect findings to practical decisions.
+
+## Getting Started
+
+**Recommended Python version: 3.12**
+
+Install the requirements before running the notebooks.
+
+From the repository root:
+
+```bash
+python -m pip install -r misc/requirements.txt
+```
+
+Launch JupyterLab:
+
+```bash
+python -m jupyterlab
+```
+
+Open the desired notebook in `tabular/`, check its dataset path, and run the cells in order.
+
+## Repository Guide
+
+| Location | Contents |
+| --- | --- |
+| `misc/requirements.txt` | Project dependencies |
+| `misc/Research_question.md` | Original research-question notes |
+| `tabular/` | Dataset and analysis notebooks |
+| `tabular/figures_plots/` | Saved figures and visualizations |
+
+## Conclusion
+
+This project demonstrated how physical pitch measurements can support exploratory pitch classification and clustering.
+
+KNN provided a baseline for predicting pitch types, while K-means revealed groups of pitches with similar velocity and spin characteristics. Visualizations helped describe pitch distributions and pitcher-location patterns.
+
+The findings provide a starting point for further softball analytics. More games, verified pitch-type labels, corrected pitcher records, and coaching feedback are needed before drawing stronger conclusions.
+
+## Future Work
+
+- Collect data from additional games.
+- Validate estimated pitch-type labels using video or coaching input.
+- Resolve pitcher-label inconsistencies.
+- Evaluate classification performance on independently labeled pitches.
+- Investigate whether observed pitch groups remain consistent across games.
+- Connect the analysis to specific coaching and player-development questions.
 
 ## Tools
 
@@ -108,10 +233,23 @@ Because of this, the project will avoid making broad claims about overall player
 - NumPy
 - Matplotlib / Seaborn
 - scikit-learn
-- Jupyter Notebook
+- Jupyter Notebook / JupyterLab
 - Git / GitHub
 
-Additional tools may be introduced as the project develops.
+## Contributors
+
+- Nathan Butler
+- Michael Sheehey
+- Franklin Osualaaham
+- Joseph Uzoigwe
+- Sarthakkumar Patel
+
+## Resources
+
+- [FlightScope Softball](https://flightscope.com/pages/softball)
+- [FlightScope Softball Glossary](https://cdn.shopify.com/s/files/1/0597/2623/3732/files/2023_X3B_Softball_Glossary.pdf?v=1729085792)
+- [Baseball Savant Visuals](https://baseballsavant.mlb.com/visuals)
+- [Original Research Question Notes](misc/Research_question.md)
 
 ## Course
 
