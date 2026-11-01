@@ -2,7 +2,8 @@
 
 **DATA 4380 — Data Problems**  
 **The University of Texas at Arlington**  
-**Project Status: Completed**
+**Project Status: Completed**  
+**Powerpoint Presentation: [Link](https://docs.google.com/presentation/d/1quD8WbCUgriHZuWo-HUjHOuAEmO272AsDG3oYSKcoaA/edit?slide=id.h2b5d8175afa81ba9_1_60#slide=id.h2b5d8175afa81ba9_1_60)**
 
 ## Overview
 
